@@ -66,6 +66,30 @@ class LinkedList:
         newNode.next = current.next
         current.next = newNode
         self.length += 1
+    
+    '''Deleting Node in first position'''
+    def delete_front(self):
+        if self.length == 0:
+            print("Empty LinkedList")
+        else:
+            self.head = self.head.next
+            self.length -= 1
+    '''Deleting Node at end of list'''
+    def delete_end(self):
+        if self.length == 0:
+            print("Empty LinkedList")
+        else:
+            #to get previous node:
+            #make current node previous while next node to be current
+            #terminate if there is no next node:
+            #this keeps previous node and current node
+            current = self.head
+            prev_node = self.head
+            while current.next != None:
+                prev_node = current
+                current = current.next
+            prev_node.next = None
+            self.length -= 1
 
 
         
@@ -91,6 +115,10 @@ list.insert_end(50)
 list.insert_end(80)
 list.insert(5,100)
 
+
+#deleting node
+list.delete_front()
+list.delete_end()
 
 
 #printing list of nodes in linked list
