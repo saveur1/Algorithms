@@ -91,8 +91,68 @@ class LinkedList:
             prev_node.next = None
             self.length -= 1
 
+    ''' DELETE FROM LINKED LIST WITH NODE'''
+    def delete_node(self,node):
+        if self.length == 0:
+            raise ValueError("Linked list is Empty")
+        
+        current = self.head
+        previous = None
+        found = False
+        while not found:
+            if current == node:
+                found = True
+            elif current == None:
+                raise ValueError("Node is not found")
+            else:
+                previous = current
+                current = current.next
+        
+        if previous is None:
+            self.head = current.next
+        else:
+            previous = current.next
 
         
+        raise ValueError("Node not found")
+    
+    ''' DELETE FROM LINKED LIST WITH VALUE'''
+    def delete_data(self,value):
+        current = self.head
+        previous = self.head
+        while current.next != None or current.data == value:
+            if current.data == value:
+                previous.next = current.next
+                self.length-=1
+                return
+            else:
+                previous = current
+                current = current.next
+        
+        print("There is no node found with that data")
+
+    ''' DELETE FROM LINKED LIST WITH POSITION'''
+    def delete(self,position):
+        current = self.head
+        previous = self.head
+        count = 0
+
+        if position < 0 or position > self.length-1:
+            raise ValueError("Invalid position provided")
+        elif position==0:
+            self.delete_front()
+        else:
+            while current.next != None or count <= position:
+                if count == position:
+                    previous.next = current.next
+                    self.length -= 1
+                    return
+                else:
+                    previous = current
+                    current = current.next
+                    count = count + 1
+
+                
     
     '''method to display all nodes in linked list'''
     def display(self):
@@ -102,6 +162,11 @@ class LinkedList:
             print("item "+str(count)+": "+str(current.data))
             count+=1
             current = current.next
+
+    '''CLEARING ELEMENTS FROM LINKED LIST'''
+    def clear(self):
+        self.head = None
+        self.length = 0
     
 
     
@@ -119,7 +184,8 @@ list.insert(5,100)
 #deleting node
 list.delete_front()
 list.delete_end()
-
+list.delete_data(80)
+list.delete(2)
 
 #printing list of nodes in linked list
 list.display()
